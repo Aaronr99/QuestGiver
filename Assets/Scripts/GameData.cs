@@ -33,7 +33,28 @@ public class GameData : MonoBehaviour
     }
     #endregion
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+        if (!initialized)
+        {
+            weekCount = 1;
+            initialized = true;
+        }
+    }
+
     public List<LevelAndColor> levelAndColors;
+
+    public List<Adventurer> activeAdventurers;
+
+    public List<ClassAndVisuals> classAndVisuals;
+
+    public List<WeaponsAndVisuals> weaponsAndVisuals;
+
+    public int weekCount;
+
+    public bool initialized;
+
 
     public Color ObtainColorByLevel(int pLevel)
     {
@@ -46,6 +67,115 @@ public class GameData : MonoBehaviour
         }
         return Color.gray;
     }
+
+    public GameObject ObtainAdventurerVisuals(AdventurerType adventurerType)
+    {
+        foreach (ClassAndVisuals classAndVisual in classAndVisuals)
+        {
+            if (adventurerType == classAndVisual.adventurerType)
+            {
+                return classAndVisual.visualGO;
+            }
+        }
+        return null;
+    }
+
+    public GameObject ObtainWeaponVisuals(WeaponType weaponType)
+    {
+        foreach (WeaponsAndVisuals weaponAndVisual in weaponsAndVisuals)
+        {
+            if (weaponType == weaponAndVisual.weaponType)
+            {
+                return weaponAndVisual.weaponGO;
+            }
+        }
+        return null;
+    }
+
+    private List<string> randomNames = new List<string>()
+    {
+            "Aaryn", "Aaro", "Aarus", "Abramus", "Abrahm", "Abyl", "Abelus", "Adannius", "Adanno", "Aedam", "Adym", "Adamus",
+            "Aedrian", "Aedrio", "Aedyn", "Aidyn", "Aelijah", "Elyjah", "Aendro", "Androe", "Aenry", "Hynroe", "Hynrus",
+            "Aethan", "Aethyn", "Aevan", "Evyn", "Evanus", "Alecks", "Alyx", "Alexandyr", "Xandyr", "Alyn", "Alaen", "Andrus",
+            "Aendrus", "Anglo", "Aenglo", "Anglus", "Antony", "Antonyr", "Astyn", "Astinus", "Axelus", "Axyl", "Benjamyn",
+            "Benjamyr", "Braidyn", "Brydus", "Braddeus", "Brandyn", "Braendyn", "Bryus", "Bryne", "Bryn", "Branus", "Caeleb",
+            "Caelyb", "Caerlos", "Carlus", "Cameryn", "Camerus", "Cartus", "Caertero", "Charlus", "Chaerles", "Chyrles",
+            "Christophyr", "Christo", "Chrystian", "Chrystan", "Connorus", "Connyr", "Daemian", "Damyan", "Daenyel", "Danyel",
+            "Davyd", "Daevo", "Dominac", "Dylaen", "Dylus", "Elius", "Aeli", "Elyas", "Helius", "Helian", "Emilyan", "Emilanus",
+            "Emmanus", "Emynwell", "Ericus", "Eryc", "Eryck", "Ezekius", "Zeckus", "Ezekio", "Ezrus", "Yzra", "Gabrael",
+            "Gaebriel", "Gael", "Gayl", "Gayel", "Gaeus", "Gavyn", "Gaevyn", "Goshwa", "Joshoe", "Graysus", "Graysen",
+            "Gwann", "Ewan", "Gwyllam", "Gwyllem", "Haddeus", "Hudsyn", "Haesoe", "Haesys", "Haesus", "Handus", "Handyr",
+            "Hantus", "Huntyr", "Haroldus", "Haryld", "Horgus", "Horus", "Horys", "Horyce", "Hosea", "Hosius", "Iaen", "Yan",
+            "Ianus", "Ivaen", "Yvan", "Jaecoby", "Jaecob", "Jaeden", "Jaedyn", "Jaeremiah", "Jeremus", "Jasyn", "Jaesen",
+            "Jaxon", "Jaxyn", "Jaxus", "Johnus", "Jonus", "Jonaeth", "Jonathyn", "Jordus", "Jordyn", "Josaeth", "Josephus",
+            "Josaeus", "Josayah", "Jovanus", "Giovan", "Julyan", "Julyo", "Jyck", "Jaeck", "Jacus", "Kaevin", "Kevyn", "Vinkus",
+            "Laevi", "Levy", "Levius", "Landyn", "Laendus", "Leo", "Leonus", "Leonaerdo", "Leonyrdo", "Lynardus", "Lincon",
+            "Lyncon", "Linconus", "Logaen", "Logus", "Louis", "Lucius", "Lucae", "Lucaen", "Lucaes", "Lucoe", "Lucus", "Lyam",
+            "Maeson", "Masyn", "Maetho", "Mathoe", "Matteus", "Matto", "Maxus", "Maximus", "Maximo", "Maxymer", "Mychael",
+            "Mygwell", "Miglus", "Mythro", "Mithrus", "Naemo", "Naethyn", "Nathanus", "Naethynel", "Nicholaes", "Nycholas",
+            "Nicholys", "Nicolus", "Nolyn", "Nolanus", "Olivyr", "Alivyr", "Olivus", "Oscarus", "Oscoe", "Raen", "Ryn",
+            "Robertus", "Robett", "Bertus", "Romyn", "Romanus", "Ryderus", "Ridyr", "Samwell", "Saemuel", "Santegus",
+            "Santaegus", "Sybasten", "Bastyen", "Tago", "Aemo", "Tagus", "Theodorus", "Theodus", "Thaeodore", "Thomys",
+            "Thomas", "Tommus", "Tylus", "Tilyr", "Uwyn", "Oewyn", "Victor", "Victyr", "Victorus", "Vincynt", "Vyncent",
+            "Vincentus", "Wyttus", "Wyaett", "Xavius", "Havius", "Xavyer", "Yago", "Tyago", "Tyego", "Ysaac", "Aisaac",
+            "Ysaiah", "Aisiah", "Siahus", "Zacharus", "Zachar", "Zachaery"
+    };
+
+    public string GetRandomName()
+    {
+        int randomIndex = Random.Range(0, randomNames.Count);
+        return randomNames[randomIndex];
+    }
+
+    public List<PrefixByAdventurer> prefixByAdventurers;
+
+    public string GetRandomPrefix(AdventurerType adventurerType)
+    {
+        List<PrefixByAdventurer> adventurersPrefixses = prefixByAdventurers.FindAll(x => x.adventurerType == adventurerType);
+        int randomPrefix = UnityEngine.Random.Range(0, adventurersPrefixses.Count);
+        return adventurersPrefixses[randomPrefix].prefix;
+    }
+}
+
+[System.Serializable]
+public class ClassAndVisuals
+{
+    public AdventurerType adventurerType;
+    public GameObject visualGO;
+}
+
+[System.Serializable]
+public class WeaponsAndVisuals
+{
+    public WeaponType weaponType;
+    public GameObject weaponGO;
+}
+
+[System.Serializable]
+public class PrefixByAdventurer
+{
+    public AdventurerType adventurerType;
+    public string prefix;
+}
+
+public enum AdventurerType
+{
+    Goblin,
+    Kimono,
+    Knight,
+    Ninja,
+    Pirate,
+    Viking,
+    Wizard
+}
+
+public enum WeaponType
+{
+    Sword,
+    Axe,
+    Dagger,
+    Bow,
+    Staff
 }
 
 [System.Serializable]

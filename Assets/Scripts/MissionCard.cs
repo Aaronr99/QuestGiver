@@ -6,10 +6,7 @@ using UnityEngine.UI;
 
 public class MissionCard : MonoBehaviour
 {
-    public string title;
-    public int level;
-    public float moralLoss;
-    public int hpLoss;
+    public MissionInfo missionInfo;
     [SerializeField] private TMP_Text titleText;
     [SerializeField] private TMP_Text lvlText;
     [SerializeField] private TMP_Text moralText;
@@ -18,18 +15,15 @@ public class MissionCard : MonoBehaviour
     [SerializeField] private Image background1;
     [SerializeField] private Image background2;
 
-    public void SetCardInfo(string pTitle, int pLevel, int pMoral, int pHp)
+    public void SetCardInfo(MissionInfo pMissionInfo)
     {
-        title = pTitle;
-        level = pLevel;
-        moralLoss = pMoral;
-        hpLoss = pHp;
-        titleText.text = title;
-        lvlText.text = level.ToString();
-        moralText.text = moralLoss.ToString();
-        hpText.text = hpLoss.ToString();
+        missionInfo = pMissionInfo;
+        titleText.text = missionInfo.title;
+        lvlText.text = missionInfo.level.ToString();
+        moralText.text = missionInfo.moralLoss.ToString();
+        hpText.text = missionInfo.hpLoss.ToString();
 
-        Color colorToSet = GameData.Instance.ObtainColorByLevel(level);
+        Color colorToSet = GameData.Instance.ObtainColorByLevel(missionInfo.level);
         background1.color = colorToSet;
         background2.color = colorToSet;
     }
