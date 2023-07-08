@@ -9,8 +9,10 @@ public class MissionCard : MonoBehaviour
     public MissionInfo missionInfo;
     [SerializeField] private TMP_Text titleText;
     [SerializeField] private TMP_Text lvlText;
-    [SerializeField] private TMP_Text moralText;
-    [SerializeField] private TMP_Text hpText;
+    [SerializeField] private OutcomeField winOutcome;
+    [SerializeField] private OutcomeField successOutcome;
+    [SerializeField] private OutcomeField loseOutcome;
+
 
     [SerializeField] private Image background1;
     [SerializeField] private Image background2;
@@ -20,8 +22,15 @@ public class MissionCard : MonoBehaviour
         missionInfo = pMissionInfo;
         titleText.text = missionInfo.title;
         lvlText.text = missionInfo.level.ToString();
-        moralText.text = missionInfo.moralLoss.ToString();
-        hpText.text = missionInfo.hpLoss.ToString();
+
+        winOutcome.hpValueText.text = missionInfo.GetHpOnWin().ToString();
+        winOutcome.xpValueText.text = missionInfo.GetXpOnWin().ToString();
+
+        successOutcome.hpValueText.text = missionInfo.GetHpOnSucess().ToString();
+        successOutcome.xpValueText.text = missionInfo.GetXpOnSucess().ToString();
+
+        loseOutcome.hpValueText.text = missionInfo.GetHpOnLose().ToString();
+        loseOutcome.xpValueText.text = missionInfo.GetXpOnLose().ToString();
 
         Color colorToSet = GameData.Instance.ObtainColorByLevel(missionInfo.level);
         background1.color = colorToSet;

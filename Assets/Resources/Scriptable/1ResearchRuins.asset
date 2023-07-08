@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abb2c1f83b0014d41a76cba7ade1aea7, type: 3}
+  m_Name: 1ResearchRuins
+  m_EditorClassIdentifier: 
+  adventurerOnTest: {fileID: 0}
+  title: Research Ruins
+  level: 1
+  hpLoss: 10
+  favouredAdventurer: 6
+  disfavoredAdventurer: 1
+  favoredWeapon: 0
+  disfavoredWeapon: 2
+  winText: gained forbidden knowlegge!
+  successText: become smarted.
+  loseText: ended up confused and had fallen into a trap.

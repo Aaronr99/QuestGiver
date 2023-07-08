@@ -135,6 +135,38 @@ public class GameData : MonoBehaviour
         int randomPrefix = UnityEngine.Random.Range(0, adventurersPrefixses.Count);
         return adventurersPrefixses[randomPrefix].prefix;
     }
+
+    public List<MissionInfo> missionInfos;
+
+    public MissionInfo GetRandomMission(int missionLevel)
+    {
+        List<MissionInfo> missionsPerLevel = missionInfos.FindAll(x => x.level == missionLevel);
+        int randomIndex = UnityEngine.Random.Range(0, missionsPerLevel.Count);
+        return missionsPerLevel[randomIndex];
+    }
+
+    public GameObject missionPrefab;
+
+    public List<Dificulty> dificulties;
+
+    public Dificulty GetDificulty()
+    {
+        int dificultyValue = Mathf.RoundToInt(weekCount / 4);
+        if (dificultyValue <= 0)
+        {
+            dificultyValue = 1;
+        }
+        return dificulties.Find(x => x.value == dificultyValue);
+    }
+
+    public List<MissionInfo> activeMissions;
+}
+
+[System.Serializable]
+public class Dificulty
+{
+    public int value;
+    public List<int> cardLevels;
 }
 
 [System.Serializable]
@@ -156,26 +188,6 @@ public class PrefixByAdventurer
 {
     public AdventurerType adventurerType;
     public string prefix;
-}
-
-public enum AdventurerType
-{
-    Goblin,
-    Kimono,
-    Knight,
-    Ninja,
-    Pirate,
-    Viking,
-    Wizard
-}
-
-public enum WeaponType
-{
-    Sword,
-    Axe,
-    Dagger,
-    Bow,
-    Staff
 }
 
 [System.Serializable]

@@ -8,14 +8,19 @@ public class QuestGManager : MonoBehaviour
 {
     public TMP_Text charLevelText;
     public TMP_Text charHpText;
-    public TMP_Text charMoralText;
     public TMP_Text charNameText;
     public TMP_Text weeksText;
 
+    public Transform missionBoard;
+
+    public Queue<GameObject> adventurerQueue;
+
     private void Start()
     {
-        GenerateAdventurers();
+        adventurerQueue = new Queue<GameObject>();
+        weeksText.text = GameData.Instance.weekCount.ToString();
         GenerateMissions();
+        GenerateAdventurers();
     }
 
     private void GenerateAdventurers()
@@ -32,6 +37,7 @@ public class QuestGManager : MonoBehaviour
             randomType = UnityEngine.Random.Range(0, 5);
             newAdventurer.weaponType = (WeaponType)randomType;
             GameData.Instance.activeAdventurers.Add(newAdventurer);
+
         }
         int cont = 1;
         foreach (Adventurer adventurer in GameData.Instance.activeAdventurers)
@@ -41,13 +47,19 @@ public class QuestGManager : MonoBehaviour
             cont++;
             adventurerGO.GetComponent<AdventurerVisuals>().relationedAdventurer = adventurer;
             GameObject weaponGO = Instantiate(GameData.Instance.ObtainWeaponVisuals(adventurer.weaponType), adventurerGO.GetComponent<AdventurerVisuals>().handGO.transform);
-
+            adventurerQueue.Enqueue(adventurerGO);
         }
     }
 
     private void GenerateMissions()
     {
-        //throw new NotImplementedException();
+        Dificulty targetDificulty = GameData.Instance.GetDificulty();
+        for (int i = 0; i < 5; i++)
+        {
+            GameObject cardGO = Instantiate(GameData.Instance.missionPrefab, missionBoard);
+            MissionCard card = cardGO.GetComponent<MissionCard>();
+            MissionInfo missionInfo = Instantiate(GameData.Instance.GetRandomMission(targetDificulty.cardLevels[i]));
+            card.SetCardInfo(missionInfo);
+        }
     }
-
 }
