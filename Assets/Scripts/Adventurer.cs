@@ -7,7 +7,7 @@ public class Adventurer : ScriptableObject
     public string characterName;
     public int characterLevel;
     public int hpTotal;
-    public float totalMoral;
+    public int experience;
     public AdventurerType adventurerType;
     public WeaponType weaponType;
     public int GetMaxHP()
@@ -40,5 +40,28 @@ public class Adventurer : ScriptableObject
                 break;
         }
         return baseHP * characterLevel;
+    }
+
+    public int GetMaxExperience()
+    {
+        int baseExperience = 100;
+        return baseExperience + 50 * characterLevel;
+    }
+
+    /// <summary>
+    ///  Retorna true cuando el character sube de level
+    /// </summary>
+    /// <param name="ammount"></param>
+    /// <returns></returns>
+    public bool AddExperience(int ammount)
+    {
+        experience += ammount;
+        if (experience > GetMaxExperience())
+        {
+            experience = 0;
+            characterLevel += 1;
+            return true;
+        }
+        return false;
     }
 }
