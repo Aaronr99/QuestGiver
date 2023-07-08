@@ -13,11 +13,12 @@ public class QuestGManager : MonoBehaviour
 
     public Transform missionBoard;
 
-    public Queue<GameObject> adventurerQueue;
+    public List<GameObject> adventurersList;
+    public Queue<GameObject> pendingAdventurers;
 
     private void Start()
     {
-        adventurerQueue = new Queue<GameObject>();
+        adventurersList = new List<GameObject>();
         weeksText.text = GameData.Instance.weekCount.ToString();
         GenerateMissions();
         GenerateAdventurers();
@@ -43,12 +44,13 @@ public class QuestGManager : MonoBehaviour
         foreach (Adventurer adventurer in GameData.Instance.activeAdventurers)
         {
             GameObject adventurerGO = Instantiate(GameData.Instance.ObtainAdventurerVisuals(adventurer.adventurerType));
-            adventurerGO.transform.position = new Vector3(-5f, 0f, 0.4f) * cont;
+            adventurerGO.transform.position = new Vector3(-4f * cont, 0f, -1);
             cont++;
             adventurerGO.GetComponent<AdventurerVisuals>().relationedAdventurer = adventurer;
             GameObject weaponGO = Instantiate(GameData.Instance.ObtainWeaponVisuals(adventurer.weaponType), adventurerGO.GetComponent<AdventurerVisuals>().handGO.transform);
-            adventurerQueue.Enqueue(adventurerGO);
+            adventurersList.Add(adventurerGO);
         }
+        StartCoroutine(MoveCharacter());
     }
 
     private void GenerateMissions()
@@ -61,5 +63,41 @@ public class QuestGManager : MonoBehaviour
             MissionInfo missionInfo = Instantiate(GameData.Instance.GetRandomMission(targetDificulty.cardLevels[i]));
             card.SetCardInfo(missionInfo);
         }
+    }
+
+    private IEnumerator MoveCharacter()
+    {
+        float speedMod;
+        foreach (GameObject adventurerGO in adventurersList)
+        {
+            speedMod = Mathf.Abs(adventurerGO.transform.position.x) / 2.5f;
+            if (speedMod < 1f)
+            {
+                speedMod = 1f;
+            }
+            Vector3 targetPosition = adventurerGO.transform.position + Vector3.right * 4f;
+            adventurerGO.GetComponent<AdventurerVisuals>().animator.CrossFade("Walk", 0.1f, 0);
+            Quaternion originalRotation = adventurerGO.transform.rotation;
+            Quaternion targetRotation = Quaternion.Euler(0f, 90f, 0f);
+            while (Quaternion.Angle(adventurerGO.transform.rotation, targetRotation) > 0.5f)
+            {
+                adventurerGO.transform.rotation = Quaternion.RotateTowards(adventurerGO.transform.rotation, targetRotation, 150f * Time.deltaTime * speedMod);
+                yield return new WaitForEndOfFrame();
+            }
+            while (Vector3.Distance(adventurerGO.transform.position, targetPosition) > 0.05f)
+            {
+                adventurerGO.transform.position = Vector3.MoveTowards(adventurerGO.transform.position, targetPosition, Time.deltaTime * 2f * speedMod);
+                yield return new WaitForEndOfFrame();
+            }
+            while (Quaternion.Angle(adventurerGO.transform.rotation, originalRotation) > 0.5f)
+            {
+                adventurerGO.transform.rotation = Quaternion.RotateTowards(adventurerGO.transform.rotation, originalRotation, 150f * Time.deltaTime * speedMod);
+                yield return new WaitForEndOfFrame();
+            }
+            adventurerGO.GetComponent<AdventurerVisuals>().animator.CrossFade("Iddle", 0.1f, 0);
+            yield return new WaitForEndOfFrame();
+        }
+        Debug.Log("Finished");
+        yield return null;
     }
 }
