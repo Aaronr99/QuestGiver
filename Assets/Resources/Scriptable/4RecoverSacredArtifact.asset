@@ -10,16 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: abb2c1f83b0014d41a76cba7ade1aea7, type: 3}
-  m_Name: 2RecoverDivineItem
+  m_Name: 4RecoverSacredArtifact
   m_EditorClassIdentifier: 
   adventurerOnTest: {fileID: 0}
-  title: Recover the divine item
-  level: 2
+  title: Recover the sacred artifact
+  level: 4
   favouredAdventurer: 2
   disfavoredAdventurer: 0
   favoredWeapon: 4
   disfavoredWeapon: 2
-  dangerLevel: 2
-  winText: "found the item and defeated the evil doers!\t"
-  successText: found the item and escaped with some scratches.
-  loseText: were repeled by the evil forces.
+  dangerLevel: 3
+  winText: finds the sacred artifact, and it recognizes him as its rightful owner!
+  successText: finds the sacred artifact after many hardships and delivers it to
+    the church.
+  loseText: is repelled by the sacred artifact, and his soul is harmed in the process.

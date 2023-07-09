@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: abb2c1f83b0014d41a76cba7ade1aea7, type: 3}
-  m_Name: 2RecoverDivineItem
+  m_Name: 3CaptureAMonsterAlive
   m_EditorClassIdentifier: 
   adventurerOnTest: {fileID: 0}
-  title: Recover the divine item
-  level: 2
-  favouredAdventurer: 2
-  disfavoredAdventurer: 0
-  favoredWeapon: 4
-  disfavoredWeapon: 2
+  title: Capture a monster alive
+  level: 3
+  favouredAdventurer: 0
+  disfavoredAdventurer: 5
+  favoredWeapon: 2
+  disfavoredWeapon: 1
   dangerLevel: 2
-  winText: "found the item and defeated the evil doers!\t"
-  successText: found the item and escaped with some scratches.
-  loseText: were repeled by the evil forces.
+  winText: cleverly tricks the monster and captures it using a trap.
+  successText: weakens the monster by fighting it, and then captures it using a trap.
+  loseText: is defeated by the monster and gets trapped in his own trap.

@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: abb2c1f83b0014d41a76cba7ade1aea7, type: 3}
-  m_Name: 1FightInThePits
+  m_Name: 2HuntAGangster
   m_EditorClassIdentifier: 
   adventurerOnTest: {fileID: 0}
-  title: Fight in the pits
-  level: 1
-  favouredAdventurer: 5
+  title: Hunting down a notorious bandit
+  level: 2
+  favouredAdventurer: 4
   disfavoredAdventurer: 6
-  favoredWeapon: 1
-  disfavoredWeapon: 3
+  favoredWeapon: 3
+  disfavoredWeapon: 1
   dangerLevel: 1
-  winText: defeated all the fighters without an scratch.
-  successText: managed to barely defeat all the fighters.
-  loseText: suffered a severe injury!
+  winText: hunts down the bandit and completely eradicates his gang.
+  successText: hunts down the bandit but gets injured by his gang.
+  loseText: is repelled by the bandits and sustains significant damage.

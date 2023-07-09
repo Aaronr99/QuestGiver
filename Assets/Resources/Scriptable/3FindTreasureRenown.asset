@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: abb2c1f83b0014d41a76cba7ade1aea7, type: 3}
-  m_Name: 2RecoverDivineItem
+  m_Name: 3FindTreasureRenown
   m_EditorClassIdentifier: 
   adventurerOnTest: {fileID: 0}
-  title: Recover the divine item
-  level: 2
-  favouredAdventurer: 2
-  disfavoredAdventurer: 0
-  favoredWeapon: 4
-  disfavoredWeapon: 2
+  title: Find the treasure of a renowned pirate.
+  level: 3
+  favouredAdventurer: 4
+  disfavoredAdventurer: 2
+  favoredWeapon: 0
+  disfavoredWeapon: 1
   dangerLevel: 2
-  winText: "found the item and defeated the evil doers!\t"
-  successText: found the item and escaped with some scratches.
-  loseText: were repeled by the evil forces.
+  winText: finds the treasure and obtains even more than expected.
+  successText: finds the treasure after overcoming a series of trials.
+  loseText: "is repelled by the ghost of the pirate and leaves empty-handed.\r\r"

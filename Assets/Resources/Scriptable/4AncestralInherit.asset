@@ -10,16 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: abb2c1f83b0014d41a76cba7ade1aea7, type: 3}
-  m_Name: 2RecoverDivineItem
+  m_Name: 4AncestralInherit
   m_EditorClassIdentifier: 
   adventurerOnTest: {fileID: 0}
-  title: Recover the divine item
-  level: 2
-  favouredAdventurer: 2
+  title: Inherits the legacy of an ancient being
+  level: 4
+  favouredAdventurer: 6
   disfavoredAdventurer: 0
   favoredWeapon: 4
   disfavoredWeapon: 2
   dangerLevel: 2
-  winText: "found the item and defeated the evil doers!\t"
-  successText: found the item and escaped with some scratches.
-  loseText: were repeled by the evil forces.
+  winText: "completes all the trials and receives the complete inheritance.\r"
+  successText: completes the majority of the trials and receives a portion of the
+    inheritance.
+  loseText: is expelled halfway through the trials after infuriating the ancestral
+    spirit.

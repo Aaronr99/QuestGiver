@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abb2c1f83b0014d41a76cba7ade1aea7, type: 3}
+  m_Name: 1TeachSelfDefense
+  m_EditorClassIdentifier: 
+  adventurerOnTest: {fileID: 0}
+  title: Teach self defense to the villagers
+  level: 1
+  favouredAdventurer: 1
+  disfavoredAdventurer: 6
+  favoredWeapon: 2
+  disfavoredWeapon: 4
+  dangerLevel: 0
+  winText: teaches them to defend themselves, and they are able to drive away the
+    bandits on their own.
+  successText: teaches them to defend themselves, and with your help, they are able
+    to drive away the bandits.
+  loseText: tries to teach them, but the villagers do not adapt in time and fall
+    under the control of the bandits.

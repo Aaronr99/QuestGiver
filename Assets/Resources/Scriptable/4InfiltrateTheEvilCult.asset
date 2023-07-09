@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abb2c1f83b0014d41a76cba7ade1aea7, type: 3}
+  m_Name: 4InfiltrateTheEvilCult
+  m_EditorClassIdentifier: 
+  adventurerOnTest: {fileID: 0}
+  title: Infiltrate the evil cult and gather information.
+  level: 4
+  favouredAdventurer: 3
+  disfavoredAdventurer: 5
+  favoredWeapon: 2
+  disfavoredWeapon: 1
+  dangerLevel: 3
+  winText: infiltrates the evil cult and obtains information directly from the high-ranking
+    members.
+  successText: manages to infiltrate for a while, gathering some information before
+    being discovered and narrowly escaping.
+  loseText: fails to infiltrate for a long time until he is discovered, managing
+    to escape but being affected by a curse.

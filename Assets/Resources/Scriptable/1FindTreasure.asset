@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: abb2c1f83b0014d41a76cba7ade1aea7, type: 3}
-  m_Name: 1FightInThePits
+  m_Name: 1FindTreasure
   m_EditorClassIdentifier: 
   adventurerOnTest: {fileID: 0}
-  title: Fight in the pits
+  title: Find the treasure on the island
   level: 1
-  favouredAdventurer: 5
-  disfavoredAdventurer: 6
-  favoredWeapon: 1
-  disfavoredWeapon: 3
+  favouredAdventurer: 4
+  disfavoredAdventurer: 2
+  favoredWeapon: 0
+  disfavoredWeapon: 1
   dangerLevel: 1
-  winText: defeated all the fighters without an scratch.
-  successText: managed to barely defeat all the fighters.
-  loseText: suffered a severe injury!
+  winText: finds the treasure without much difficulty.
+  successText: finds the treasure after overcoming a series of trials.
+  loseText: doesn't find the treasure and is chased away by the natives of the island.

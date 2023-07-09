@@ -60,6 +60,7 @@ public class Adventurer : ScriptableObject
         {
             experience = 0;
             characterLevel += 1;
+            hpTotal = GetMaxHP();
             return true;
         }
         return false;

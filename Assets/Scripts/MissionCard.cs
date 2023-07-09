@@ -11,6 +11,7 @@ public class MissionCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     [SerializeField] private TMP_Text titleText;
     [SerializeField] private TMP_Text lvlText;
     [SerializeField] private TMP_Text dangerText;
+    public TMP_Text fitText;
 
     /*[SerializeField] private OutcomeField winOutcome;
     [SerializeField] private OutcomeField successOutcome;

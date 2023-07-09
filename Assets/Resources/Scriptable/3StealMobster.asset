@@ -10,16 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: abb2c1f83b0014d41a76cba7ade1aea7, type: 3}
-  m_Name: 1FightInThePits
+  m_Name: 3StealMobster
   m_EditorClassIdentifier: 
   adventurerOnTest: {fileID: 0}
-  title: Fight in the pits
-  level: 1
-  favouredAdventurer: 5
-  disfavoredAdventurer: 6
-  favoredWeapon: 1
-  disfavoredWeapon: 3
+  title: Steal from a well-known mobster
+  level: 3
+  favouredAdventurer: 3
+  disfavoredAdventurer: 2
+  favoredWeapon: 2
+  disfavoredWeapon: 1
   dangerLevel: 1
-  winText: defeated all the fighters without an scratch.
-  successText: managed to barely defeat all the fighters.
-  loseText: suffered a severe injury!
+  winText: steals the belongings of the mobster and ruins his plans in the region.
+  successText: manages to steal something from the treasure, almost being discovered
+    in the process.
+  loseText: is caught red-handed and receives a beating.

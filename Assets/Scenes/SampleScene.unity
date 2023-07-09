@@ -185,6 +185,9 @@ MonoBehaviour:
   hpBar: {fileID: 394043440}
   xpBar: {fileID: 1416760803}
   topCanvas: {fileID: 1364800406}
+  missionCards: []
+  goodFitColor: {r: 0.36078432, g: 0.85882354, b: 0.2, a: 1}
+  badFitColor: {r: 0.85882354, g: 0.20784314, b: 0.2, a: 1}
 --- !u!1 &90954513
 GameObject:
   m_ObjectHideFlags: 0
@@ -2981,10 +2984,26 @@ MonoBehaviour:
     prefix: Wise
   missionInfos:
   - {fileID: 11400000, guid: 9a07220fcabfc3a4b828c4caa0a58a07, type: 2}
+  - {fileID: 11400000, guid: 6b07e070b30c7aa4f811365072a6a863, type: 2}
   - {fileID: 11400000, guid: 28444f247032e544fab9465c842e32a7, type: 2}
   - {fileID: 11400000, guid: 127711b3ef840c64eab8e63e3b3146e3, type: 2}
   - {fileID: 11400000, guid: 10e3fda502ef94d42be6801b77836063, type: 2}
+  - {fileID: 11400000, guid: 2d611ee181a09f84eafd5d3cdca22e5b, type: 2}
+  - {fileID: 11400000, guid: 3eb986c91b5f1b6409c29b299231c516, type: 2}
+  - {fileID: 11400000, guid: 71a23a749b292a34ea16ba1484eb34b1, type: 2}
+  - {fileID: 11400000, guid: 415a5fbf513b7f24282f84a68808751c, type: 2}
+  - {fileID: 11400000, guid: 84b0485dde46d7c4892b1c885d40c501, type: 2}
   - {fileID: 11400000, guid: f94853fbf9b1b2d4d906c649c9676730, type: 2}
+  - {fileID: 11400000, guid: c8b23224437d7ab438fc3da940beed8f, type: 2}
+  - {fileID: 11400000, guid: 816120ee92f0bf54c8555787dcd902b1, type: 2}
+  - {fileID: 11400000, guid: 6764c3b466db1ac48b6a6b5674db2071, type: 2}
+  - {fileID: 11400000, guid: c652380291b43ac43b478ec18c5aaef2, type: 2}
+  - {fileID: 11400000, guid: 1b01d5279192d0148ba03350114483e2, type: 2}
+  - {fileID: 11400000, guid: 6fd2760865527da429d5eb7f9b93cf0a, type: 2}
+  - {fileID: 11400000, guid: be28edbcf2b492e42964743ad28200d7, type: 2}
+  - {fileID: 11400000, guid: 27e5fc998915d664ab641f6ac4c9e52c, type: 2}
+  - {fileID: 11400000, guid: 3e2910f5db0015f46939974f50f5e520, type: 2}
+  - {fileID: 11400000, guid: ced07b3c4822fe24fbe15291b98c6e86, type: 2}
   missionPrefab: {fileID: 5982187400608143975, guid: f820b164ed336c9448b5a225e0165407,
     type: 3}
   dificulties:
@@ -2992,6 +3011,24 @@ MonoBehaviour:
     cardLevels: 0100000001000000010000000100000002000000
   - value: 2
     cardLevels: 0100000001000000020000000200000002000000
+  - value: 3
+    cardLevels: 0100000001000000020000000200000003000000
+  - value: 4
+    cardLevels: 0100000002000000020000000300000003000000
+  - value: 5
+    cardLevels: 0100000002000000020000000300000004000000
+  - value: 6
+    cardLevels: 0100000002000000030000000300000004000000
+  - value: 7
+    cardLevels: 0200000002000000030000000300000004000000
+  - value: 8
+    cardLevels: 0200000003000000030000000400000004000000
+  - value: 9
+    cardLevels: 0200000003000000040000000400000004000000
+  - value: 10
+    cardLevels: 0300000004000000040000000400000004000000
+  - value: 11
+    cardLevels: 0500000005000000050000000500000005000000
   activeMissions: []
 --- !u!4 &909580676
 Transform:

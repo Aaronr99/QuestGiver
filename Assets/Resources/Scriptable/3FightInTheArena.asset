@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: abb2c1f83b0014d41a76cba7ade1aea7, type: 3}
-  m_Name: 1FightInThePits
+  m_Name: 3FightInTheArena
   m_EditorClassIdentifier: 
   adventurerOnTest: {fileID: 0}
-  title: Fight in the pits
-  level: 1
+  title: Fight in the arena
+  level: 3
   favouredAdventurer: 5
   disfavoredAdventurer: 6
   favoredWeapon: 1
   disfavoredWeapon: 3
-  dangerLevel: 1
-  winText: defeated all the fighters without an scratch.
-  successText: managed to barely defeat all the fighters.
+  dangerLevel: 2
+  winText: defeated all the other fighters and was crowned as the local champion.
+  successText: won the majority of his matches and ranked high in the arena's leaderboard.
   loseText: suffered a severe injury!

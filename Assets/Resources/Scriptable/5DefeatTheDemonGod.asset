@@ -10,16 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: abb2c1f83b0014d41a76cba7ade1aea7, type: 3}
-  m_Name: 2RecoverDivineItem
+  m_Name: 5DefeatTheDemonGod
   m_EditorClassIdentifier: 
   adventurerOnTest: {fileID: 0}
-  title: Recover the divine item
-  level: 2
+  title: 'Defeat The Demon God
+
+'
+  level: 5
   favouredAdventurer: 2
   disfavoredAdventurer: 0
-  favoredWeapon: 4
+  favoredWeapon: 0
   disfavoredWeapon: 2
-  dangerLevel: 2
-  winText: "found the item and defeated the evil doers!\t"
-  successText: found the item and escaped with some scratches.
-  loseText: were repeled by the evil forces.
+  dangerLevel: 3
+  winText: heroically battles the Demon God and overwhelmingly defeats it, establishing
+    himself as the greatest hero in history.
+  successText: manages to slay the Demon God, leaving his name recorded in the history
+    books.
+  loseText: despite his best efforts, is overwhelmed by the Demon God and receives
+    a massive wound.

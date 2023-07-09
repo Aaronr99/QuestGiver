@@ -48,6 +48,11 @@ public class QuestGManager : MonoBehaviour
     public Image xpBar;
 
     public GameObject topCanvas;
+    public List<MissionCard> missionCards;
+
+    public Color goodFitColor;
+    public Color badFitColor;
+
     private void Start()
     {
         Invoke("StartProcess", 0.5f);
@@ -58,6 +63,7 @@ public class QuestGManager : MonoBehaviour
         pendingAdventurers = new Queue<GameObject>();
         adventurersList = new List<GameObject>();
         GameData.Instance.activeMissions = new List<MissionInfo>();
+        missionCards = new List<MissionCard>();
 
         charPanel.SetActive(false);
         missionBoardGO.SetActive(false);
@@ -105,6 +111,7 @@ public class QuestGManager : MonoBehaviour
             MissionCard card = cardGO.GetComponent<MissionCard>();
             MissionInfo missionInfo = Instantiate(GameData.Instance.GetRandomMission(targetDificulty.cardLevels[i]));
             card.SetCardInfo(missionInfo);
+            missionCards.Add(card);
         }
     }
 
@@ -120,6 +127,52 @@ public class QuestGManager : MonoBehaviour
         charLevelText.text = "LEVEL: " + adventurer.characterLevel.ToString();
         hpBar.fillAmount = (float)adventurer.hpTotal / (float)adventurer.GetMaxHP();
         xpBar.fillAmount = (float)adventurer.experience / (float)adventurer.GetMaxExperience();
+
+        foreach (var card in missionCards)
+        {
+            int fitNumber = 3;
+            if (card.missionInfo.favoredWeapon == adventurer.weaponType)
+            {
+                fitNumber++;
+            }
+            else if (card.missionInfo.disfavoredWeapon == adventurer.weaponType)
+            {
+                fitNumber--;
+            }
+            if (card.missionInfo.favouredAdventurer == adventurer.adventurerType)
+            {
+                fitNumber++;
+            }
+            else if (card.missionInfo.disfavoredAdventurer == adventurer.adventurerType)
+            {
+                fitNumber--;
+            }
+            switch (fitNumber)
+            {
+                case 1:
+                    card.fitText.text = "Very bad fit";
+                    card.fitText.color = badFitColor;
+                    break;
+                case 2:
+                    card.fitText.text = "Bad fit";
+                    card.fitText.color = badFitColor;
+                    break;
+                case 3:
+                    card.fitText.text = "";
+                    break;
+                case 4:
+                    card.fitText.text = "Good fit";
+                    card.fitText.color = goodFitColor;
+                    break;
+                case 5:
+                    card.fitText.text = "Very good fit";
+                    card.fitText.color = goodFitColor;
+                    break;
+                default:
+                    Debug.LogError("BAD NUMBERS");
+                    break;
+            }
+        }
     }
 
     public void AssignMissionOnCharacter(MissionInfo missionInfo)
