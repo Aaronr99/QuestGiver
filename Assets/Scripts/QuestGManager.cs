@@ -98,59 +98,7 @@ public class QuestGManager : MonoBehaviour
         }
     }
 
-    private IEnumerator MoveCharacters()
-    {
-        float speedMod;
-        foreach (GameObject adventurerGO in adventurersList)
-        {
-
-            speedMod = Mathf.Abs(adventurerGO.transform.position.x) / 1.35f;
-            if (speedMod < 1f)
-            {
-                speedMod = 1f;
-            }
-            if (Vector3.Distance(adventurerGO.transform.position, Vector3.zero) < 2.5f)
-            {
-                adventurerGO.GetComponent<AdventurerVisuals>().animator.CrossFade("Sit", 0.15f, 0);
-                speedMod *= 2.5f;
-                yield return new WaitForSeconds(0.65f);
-
-            }
-            Vector3 targetPosition = adventurerGO.transform.position + Vector3.right * 4f;
-            adventurerGO.GetComponent<AdventurerVisuals>().animator.CrossFade("Walk", 0.1f, 0);
-            Quaternion originalRotation = adventurerGO.transform.rotation;
-            Quaternion targetRotation = Quaternion.Euler(0f, 90f, 0f);
-            while (Quaternion.Angle(adventurerGO.transform.rotation, targetRotation) > 0.5f)
-            {
-                adventurerGO.transform.rotation = Quaternion.RotateTowards(adventurerGO.transform.rotation, targetRotation, 180f * Time.deltaTime * speedMod);
-                yield return new WaitForEndOfFrame();
-            }
-            while (Vector3.Distance(adventurerGO.transform.position, targetPosition) > 0.05f)
-            {
-                adventurerGO.transform.position = Vector3.MoveTowards(adventurerGO.transform.position, targetPosition, Time.deltaTime * 2.5f * speedMod);
-                yield return new WaitForEndOfFrame();
-            }
-            while (Quaternion.Angle(adventurerGO.transform.rotation, originalRotation) > 0.5f)
-            {
-                adventurerGO.transform.rotation = Quaternion.RotateTowards(adventurerGO.transform.rotation, originalRotation, 180f * Time.deltaTime * speedMod);
-                yield return new WaitForEndOfFrame();
-            }
-            if (Vector3.Distance(adventurerGO.transform.position, Vector3.zero) < 2.5f)
-            {
-                adventurerGO.GetComponent<AdventurerVisuals>().animator.CrossFade("Sit", 0.3f, 0);
-            }
-            else
-            {
-                adventurerGO.GetComponent<AdventurerVisuals>().animator.CrossFade("Iddle", 0.1f, 0);
-            }
-            yield return new WaitForEndOfFrame();
-        }
-        Debug.Log("Finished");
-        EnableCharacterAsignation();
-        yield return null;
-    }
-
-    private void EnableCharacterAsignation()
+    public void EnableCharacterAsignation()
     {
         charPanel.SetActive(true);
         missionBoardGO.SetActive(true);
@@ -177,5 +125,15 @@ public class QuestGManager : MonoBehaviour
         {
             // Go to other Scene
         }
+    }
+
+    private IEnumerator MoveCharacters()
+    {
+        foreach (GameObject adventurerGO in adventurersList)
+        {
+            adventurerGO.GetComponent<AdventurerVisuals>().MoveCharacter();
+        }
+        yield return new WaitForSeconds(2f);
+        EnableCharacterAsignation();
     }
 }
