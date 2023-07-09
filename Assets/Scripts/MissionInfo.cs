@@ -39,7 +39,7 @@ public class MissionInfo : ScriptableObject
 
     public int GetHpOnLose()
     {
-        return (Convert.ToInt32(dangerLevel) + 1) * 20;
+        return (Convert.ToInt32(dangerLevel) + 1) * 15;
     }
 
     public int GetXpOnWin()

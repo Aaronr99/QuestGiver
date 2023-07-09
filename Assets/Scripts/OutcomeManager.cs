@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class OutcomeManager : MonoBehaviour
 {
@@ -23,8 +25,21 @@ public class OutcomeManager : MonoBehaviour
 
     public bool allowInput;
 
+    public Image buttonPress;
+    public Sprite buttonPressON;
+    private Sprite originalButton;
+
+    public GameObject fadeGO;
+    public GameObject mainCanvas;
+
     private void Start()
     {
+        Invoke("StartProcess", 0.5f);
+    }
+
+    private void StartProcess()
+    {
+        originalButton = buttonPress.sprite;
         allowInput = false;
         pendingMissions = new Queue<MissionInfo>();
         foreach (MissionInfo mission in GameData.Instance.activeMissions)
@@ -36,6 +51,7 @@ public class OutcomeManager : MonoBehaviour
 
     private void ShowCharacter()
     {
+        Instantiate(fadeGO, mainCanvas.transform);
         if (actualAdventurer != null)
         {
             Destroy(actualAdventurer);
@@ -189,14 +205,40 @@ public class OutcomeManager : MonoBehaviour
 
     private IEnumerator WaitForInput()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.8f);
         allowInput = true;
     }
 
+    float timer = 0;
+    bool spritePressed = false;
     private void Update()
     {
+        if (allowInput)
+        {
+            if (!buttonPress.IsActive())
+            {
+                buttonPress.gameObject.SetActive(true);
+            }
+            timer += Time.deltaTime;
+            if (timer > 0.25f)
+            {
+                timer = 0;
+                if (spritePressed)
+                {
+                    buttonPress.sprite = originalButton;
+                    spritePressed = false;
+                }
+                else
+                {
+                    spritePressed = true;
+                    buttonPress.sprite = buttonPressON;
+                }
+            }
+        }
         if (Input.GetMouseButtonDown(0) && allowInput)
         {
+            timer = 0;
+            buttonPress.gameObject.SetActive(false);
             allowInput = false;
             if (pendingMissions.Count > 0)
             {
@@ -204,7 +246,7 @@ public class OutcomeManager : MonoBehaviour
             }
             else
             {
-                SceneManager.LoadScene(1);
+                SceneManager.LoadScene(0);
             }
         }
     }

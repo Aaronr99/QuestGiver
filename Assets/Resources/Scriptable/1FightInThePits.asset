@@ -19,7 +19,7 @@ MonoBehaviour:
   disfavoredAdventurer: 6
   favoredWeapon: 1
   disfavoredWeapon: 3
-  dangerLevel: 0
+  dangerLevel: 1
   winText: defeated all the fighters without an scratch.
   successText: managed to barely defeat all the fighters.
   loseText: recived a grave injury!

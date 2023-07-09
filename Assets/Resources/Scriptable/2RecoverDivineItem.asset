@@ -15,11 +15,11 @@ MonoBehaviour:
   adventurerOnTest: {fileID: 0}
   title: Recover divine item
   level: 2
-  hpLoss: 10
   favouredAdventurer: 2
   disfavoredAdventurer: 0
   favoredWeapon: 4
   disfavoredWeapon: 2
+  dangerLevel: 2
   winText: "found the item and defeated the evil doers!\t"
   successText: found the item and escaped with some scratches.
   loseText: were repeled by the evil forces.

@@ -15,11 +15,11 @@ MonoBehaviour:
   adventurerOnTest: {fileID: 0}
   title: Research Ruins
   level: 1
-  hpLoss: 10
   favouredAdventurer: 6
   disfavoredAdventurer: 1
   favoredWeapon: 0
   disfavoredWeapon: 2
+  dangerLevel: 1
   winText: gained forbidden knowlegge!
   successText: become smarted.
   loseText: ended up confused and had fallen into a trap.

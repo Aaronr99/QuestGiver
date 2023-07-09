@@ -50,6 +50,11 @@ public class QuestGManager : MonoBehaviour
     public GameObject topCanvas;
     private void Start()
     {
+        Invoke("StartProcess", 0.5f);
+    }
+
+    private void StartProcess()
+    {
         pendingAdventurers = new Queue<GameObject>();
         adventurersList = new List<GameObject>();
         GameData.Instance.activeMissions = new List<MissionInfo>();
@@ -67,7 +72,7 @@ public class QuestGManager : MonoBehaviour
         while (GameData.Instance.activeAdventurers.Count < 5)
         {
             Adventurer newAdventurer = ScriptableObject.CreateInstance<Adventurer>();
-            int randomType = UnityEngine.Random.Range(0, 6);
+            int randomType = UnityEngine.Random.Range(0, 7);
             newAdventurer.adventurerType = (AdventurerType)randomType;
             newAdventurer.characterLevel = 1;
             newAdventurer.hpTotal = newAdventurer.GetMaxHP();
@@ -131,7 +136,7 @@ public class QuestGManager : MonoBehaviour
         else
         {
             GameData.Instance.weekCount += 1;
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(1);
         }
     }
 
