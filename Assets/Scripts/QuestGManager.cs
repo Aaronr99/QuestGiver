@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class QuestGManager : MonoBehaviour
 {
@@ -43,6 +44,8 @@ public class QuestGManager : MonoBehaviour
     public List<GameObject> adventurersList;
     public Queue<GameObject> pendingAdventurers;
     public GameObject actualAdventurer;
+    public Image hpBar;
+    public Image xpBar;
 
     public GameObject topCanvas;
     private void Start()
@@ -110,6 +113,8 @@ public class QuestGManager : MonoBehaviour
         charNameText.text = adventurer.characterName;
         charHpText.text = "HP: " + adventurer.hpTotal.ToString();
         charLevelText.text = "LEVEL: " + adventurer.characterLevel.ToString();
+        hpBar.fillAmount = (float)adventurer.hpTotal / (float)adventurer.GetMaxHP();
+        xpBar.fillAmount = (float)adventurer.experience / (float)adventurer.GetMaxExperience();
     }
 
     public void AssignMissionOnCharacter(MissionInfo missionInfo)
