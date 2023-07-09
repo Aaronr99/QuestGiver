@@ -27,16 +27,18 @@ public class MissionCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     private GameObject copyGO;
 
     private bool clickActive;
-    [SerializeField] private Camera mainCamera;
 
     public Color lowColor;
     public Color mediumColor;
     public Color highColor;
     public Color deadlyColor;
 
+    public AudioSource audioSource;
+    public AudioClip dealClip;
+    public AudioClip clickClip;
+
     private void Awake()
     {
-        mainCamera = Camera.main;
         clickActive = false;
         originalColor = GetComponent<Image>().color;
     }
@@ -76,6 +78,8 @@ public class MissionCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         copyGO.transform.localScale = Vector3.one * 0.5f;
         copyGO.SetActive(false);
         copyGO.GetComponent<MissionCard>().enabled = false;
+        copyGO.GetComponent<AudioSource>().Stop();
+        copyGO.GetComponent<AudioSource>().enabled = false;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -92,6 +96,8 @@ public class MissionCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public void OnPointerDown(PointerEventData eventData)
     {
         clickActive = true;
+        audioSource.clip = clickClip;
+        audioSource.Play();
         panel.SetActive(true);
         copyGO.SetActive(true);
     }

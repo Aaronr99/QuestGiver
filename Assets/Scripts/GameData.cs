@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class GameData : MonoBehaviour
 {
@@ -35,7 +37,15 @@ public class GameData : MonoBehaviour
 
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        if (GameObject.FindGameObjectsWithTag("GameData").Length > 1)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+       
         if (!initialized)
         {
             weekCount = 1;
@@ -54,6 +64,13 @@ public class GameData : MonoBehaviour
     public int weekCount;
 
     public bool initialized;
+
+    public AudioMixer audioMixer;
+
+    public Sprite musicOnImage;
+    public Sprite musicOffImage;
+    public Sprite audioOnImage;
+    public Sprite audioOffImage;
 
 
     public Color ObtainColorByLevel(int pLevel)
@@ -188,6 +205,38 @@ public class GameData : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public void ChangeAudioState(Button button)
+    {
+        float audioVolume;
+        audioMixer.GetFloat("AudioVolume", out audioVolume);
+        if (audioVolume == -80f)
+        {
+            audioMixer.SetFloat("AudioVolume", 1f);
+            button.image.sprite = audioOnImage;
+        }
+        else
+        {
+            audioMixer.SetFloat("AudioVolume", -80f);
+            button.image.sprite = audioOffImage;
+        }
+    }
+
+    public void ChangeMusicState(Button button)
+    {
+        float musicVolume;
+        audioMixer.GetFloat("MusicVolume", out musicVolume);
+        if (musicVolume == -80f)
+        {
+            audioMixer.SetFloat("MusicVolume", 1f);
+            button.image.sprite = musicOnImage;
+        }
+        else
+        {
+            audioMixer.SetFloat("MusicVolume", -80f);
+            button.image.sprite = musicOffImage;
+        }
     }
 }
 

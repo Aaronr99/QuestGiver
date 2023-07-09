@@ -8,6 +8,7 @@ public class AdventurerVisuals : MonoBehaviour
     public Adventurer relationedAdventurer;
     public Animator animator;
     public GameObject handGO;
+    public AudioSource audioSource;
 
     public void MoveCharacter()
     {
@@ -36,9 +37,16 @@ public class AdventurerVisuals : MonoBehaviour
             adventurerGO.transform.rotation = Quaternion.RotateTowards(adventurerGO.transform.rotation, targetRotation, 250f * Time.deltaTime * speedMod);
             yield return new WaitForEndOfFrame();
         }
+        float timePassed = 0; 
         while (Vector3.Distance(adventurerGO.transform.position, targetPosition) > 0.05f)
         {
             adventurerGO.transform.position = Vector3.MoveTowards(adventurerGO.transform.position, targetPosition, Time.deltaTime * 7f * speedMod);
+            timePassed += Time.deltaTime;
+            if(timePassed > 0.25f)
+            {
+                audioSource.Play();
+                timePassed = 0;
+            }
             yield return new WaitForEndOfFrame();
         }
         while (Quaternion.Angle(adventurerGO.transform.rotation, originalRotation) > 0.5f)

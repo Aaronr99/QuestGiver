@@ -31,8 +31,19 @@ public class OutcomeManager : MonoBehaviour
     public GameObject fadeGO;
     public GameObject mainCanvas;
 
+    public AudioSource audioSource;
+    public AudioClip winClip;
+    public AudioClip sucessAudioClip;
+    public AudioClip loseAudioClip;
+    public AudioClip clickAudioClip;
+
+    public Button audioButton;
+    public Button musicButton;
+
     private void Start()
     {
+        audioButton.onClick.AddListener(() => GameData.Instance.ChangeAudioState(audioButton));
+        musicButton.onClick.AddListener(() => GameData.Instance.ChangeMusicState(musicButton));
         Invoke("StartProcess", 0.5f);
     }
 
@@ -130,6 +141,8 @@ public class OutcomeManager : MonoBehaviour
 
     private void OutcomeWin()
     {
+        audioSource.clip = winClip;
+        audioSource.Play();
         actualAdventurer.GetComponent<AdventurerVisuals>().animator.CrossFade("Win", 0f, 0);
         stateText.text = "WIN";
         stateText.color = winColor;
@@ -154,6 +167,8 @@ public class OutcomeManager : MonoBehaviour
 
     private void OutcomeSucess()
     {
+        audioSource.clip = sucessAudioClip;
+        audioSource.Play();
         actualAdventurer.GetComponent<AdventurerVisuals>().animator.CrossFade("Walk", 0f, 0);
         stateText.text = "SUCESS";
         stateText.color = sucessColor;
@@ -179,6 +194,8 @@ public class OutcomeManager : MonoBehaviour
 
     private void OutcomeLose()
     {
+        audioSource.clip = loseAudioClip;
+        audioSource.Play();
         actualAdventurer.GetComponent<AdventurerVisuals>().animator.CrossFade("Lose", 0f, 0);
         stateText.text = "LOSE";
         stateText.color = loseColor;
@@ -241,6 +258,8 @@ public class OutcomeManager : MonoBehaviour
             allowInput = false;
             if (pendingMissions.Count > 0)
             {
+                audioSource.clip = clickAudioClip;
+                audioSource.Play();
                 ShowCharacter();
             }
             else

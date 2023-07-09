@@ -53,9 +53,16 @@ public class QuestGManager : MonoBehaviour
     public Color goodFitColor;
     public Color badFitColor;
 
+    public AudioSource audioSource;
+
+    public Button audioButton;
+    public Button musicButton;
+
     private void Start()
     {
         Invoke("StartProcess", 0.5f);
+        audioButton.onClick.AddListener(() => GameData.Instance.ChangeAudioState(audioButton));
+        musicButton.onClick.AddListener(() => GameData.Instance.ChangeMusicState(musicButton));
     }
 
     private void StartProcess()
@@ -119,6 +126,7 @@ public class QuestGManager : MonoBehaviour
     private IEnumerator EnableCards()
     {
         yield return new WaitForSeconds(0.3f);
+        missionCards = missionCards.FindAll(x => x != null);
         foreach (MissionCard missionCard in missionCards)
         {
             missionCard.gameObject.SetActive(true);
@@ -189,6 +197,7 @@ public class QuestGManager : MonoBehaviour
 
     public void AssignMissionOnCharacter(MissionInfo missionInfo)
     {
+        audioSource.Play();
         charPanel.SetActive(false);
         missionBoardGO.SetActive(false);
         missionInfo.adventurerOnTest = actualAdventurer.GetComponent<AdventurerVisuals>().relationedAdventurer;

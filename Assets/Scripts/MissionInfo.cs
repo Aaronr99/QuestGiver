@@ -33,7 +33,6 @@ public class MissionInfo : ScriptableObject
 
     public int GetHpOnSucess()
     {
-
         return (Convert.ToInt32(dangerLevel) + 1) * 5;
     }
 
@@ -44,16 +43,16 @@ public class MissionInfo : ScriptableObject
 
     public int GetXpOnWin()
     {
-        return level * (Convert.ToInt32(dangerLevel) + 1) * 60;
+        return level * (Convert.ToInt32(dangerLevel) + 1) * 70;
     }
 
     public int GetXpOnSucess()
     {
-        return level * (Convert.ToInt32(dangerLevel) + 1) * 30;
+        return level * (Convert.ToInt32(dangerLevel) + 1) * 40;
     }
 
     public int GetXpOnLose()
     {
-        return level * (Convert.ToInt32(dangerLevel) + 1) * 5;
+        return level * (Convert.ToInt32(dangerLevel) + 1) * 10;
     }
 }
