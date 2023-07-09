@@ -78,11 +78,11 @@ public class OutcomeManager : MonoBehaviour
         }
         randomOutcome += levelDiference * diferenceMod;
         OutcomeType outcomeType;
-        if (randomOutcome >= 0.8f)
+        if (randomOutcome >= 0.775f)
         {
             outcomeType = OutcomeType.Win;
         }
-        else if (randomOutcome >= 0.45f)
+        else if (randomOutcome >= 0.425f)
         {
             outcomeType = OutcomeType.Sucess;
         }

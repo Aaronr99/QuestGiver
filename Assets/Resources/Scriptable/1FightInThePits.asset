@@ -15,11 +15,11 @@ MonoBehaviour:
   adventurerOnTest: {fileID: 0}
   title: Fight in the pits
   level: 1
-  hpLoss: 15
   favouredAdventurer: 5
   disfavoredAdventurer: 6
   favoredWeapon: 1
   disfavoredWeapon: 3
+  dangerLevel: 0
   winText: defeated all the fighters without an scratch.
   successText: managed to barely defeat all the fighters.
-  loseText: barrly survived with a grave injury!
+  loseText: recived a grave injury!

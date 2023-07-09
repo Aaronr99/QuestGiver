@@ -10,10 +10,14 @@ public class MissionCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public MissionInfo missionInfo;
     [SerializeField] private TMP_Text titleText;
     [SerializeField] private TMP_Text lvlText;
-    [SerializeField] private OutcomeField winOutcome;
+    [SerializeField] private TMP_Text dangerText;
+
+    /*[SerializeField] private OutcomeField winOutcome;
     [SerializeField] private OutcomeField successOutcome;
-    [SerializeField] private OutcomeField loseOutcome;
+    [SerializeField] private OutcomeField loseOutcome;*/
     [SerializeField] private GameObject panel;
+
+
 
     [SerializeField] private Image background1;
     [SerializeField] private Image background2;
@@ -23,6 +27,11 @@ public class MissionCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     private bool clickActive;
     [SerializeField] private Camera mainCamera;
+
+    public Color lowColor;
+    public Color mediumColor;
+    public Color highColor;
+    public Color deadlyColor;
 
     private void Awake()
     {
@@ -37,14 +46,27 @@ public class MissionCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         titleText.text = missionInfo.title;
         lvlText.text = missionInfo.level.ToString();
 
-        winOutcome.hpValueText.text = missionInfo.GetHpOnWin().ToString();
-        winOutcome.xpValueText.text = missionInfo.GetXpOnWin().ToString();
-
-        successOutcome.hpValueText.text = missionInfo.GetHpOnSucess().ToString();
-        successOutcome.xpValueText.text = missionInfo.GetXpOnSucess().ToString();
-
-        loseOutcome.hpValueText.text = missionInfo.GetHpOnLose().ToString();
-        loseOutcome.xpValueText.text = missionInfo.GetXpOnLose().ToString();
+        switch (missionInfo.dangerLevel)
+        {
+            case DangerLevel.Low:
+                dangerText.text = "LOW DANGER";
+                dangerText.color = lowColor;
+                break;
+            case DangerLevel.Medium:
+                dangerText.text = "MEDIUM DANGER";
+                dangerText.color = mediumColor;
+                break;
+            case DangerLevel.High:
+                dangerText.text = "HIGH DANGER";
+                dangerText.color = highColor;
+                break;
+            case DangerLevel.Deadly:
+                dangerText.text = "DEADLY";
+                dangerText.color = deadlyColor;
+                break;
+            default:
+                break;
+        }
 
         Color colorToSet = GameData.Instance.ObtainColorByLevel(missionInfo.level);
         background1.color = colorToSet;

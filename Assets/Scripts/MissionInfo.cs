@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,13 +10,14 @@ public class MissionInfo : ScriptableObject
     [TextArea]
     public string title;
     public int level;
-    public int hpLoss;
 
     public AdventurerType favouredAdventurer;
     public AdventurerType disfavoredAdventurer;
 
     public WeaponType favoredWeapon;
     public WeaponType disfavoredWeapon;
+
+    public DangerLevel dangerLevel;
 
     [TextArea]
     public string winText;
@@ -31,26 +33,27 @@ public class MissionInfo : ScriptableObject
 
     public int GetHpOnSucess()
     {
-        return hpLoss;
+
+        return (Convert.ToInt32(dangerLevel) + 1) * 5;
     }
 
     public int GetHpOnLose()
     {
-        return hpLoss * 4;
+        return (Convert.ToInt32(dangerLevel) + 1) * 20;
     }
 
     public int GetXpOnWin()
     {
-        return level * 55;
+        return level * (Convert.ToInt32(dangerLevel) + 1) * 60;
     }
 
     public int GetXpOnSucess()
     {
-        return level * 25;
+        return level * (Convert.ToInt32(dangerLevel) + 1) * 30;
     }
 
     public int GetXpOnLose()
     {
-        return level * 5;
+        return level * (Convert.ToInt32(dangerLevel) + 1) * 5;
     }
 }
