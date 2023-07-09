@@ -81,6 +81,7 @@ public class MissionCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         if (Input.mousePosition.y > 195)
         {
             Debug.Log("APPLY MISISON");
+            QuestGManager.Instance.AssignMissionOnCharacter(missionInfo);
             Destroy(copyGO);
             Destroy(gameObject);
         }

@@ -83,7 +83,7 @@ public class QuestGManager : MonoBehaviour
             adventurersList.Add(adventurerGO);
             pendingAdventurers.Enqueue(adventurerGO);
         }
-        StartCoroutine(MoveCharacter());
+        StartCoroutine(MoveCharacters());
     }
 
     private void GenerateMissions()
@@ -98,15 +98,23 @@ public class QuestGManager : MonoBehaviour
         }
     }
 
-    private IEnumerator MoveCharacter()
+    private IEnumerator MoveCharacters()
     {
         float speedMod;
         foreach (GameObject adventurerGO in adventurersList)
         {
-            speedMod = Mathf.Abs(adventurerGO.transform.position.x) / 1.25f;
+
+            speedMod = Mathf.Abs(adventurerGO.transform.position.x) / 1.35f;
             if (speedMod < 1f)
             {
                 speedMod = 1f;
+            }
+            if (Vector3.Distance(adventurerGO.transform.position, Vector3.zero) < 2.5f)
+            {
+                adventurerGO.GetComponent<AdventurerVisuals>().animator.CrossFade("Sit", 0.15f, 0);
+                speedMod *= 2.5f;
+                yield return new WaitForSeconds(0.65f);
+
             }
             Vector3 targetPosition = adventurerGO.transform.position + Vector3.right * 4f;
             adventurerGO.GetComponent<AdventurerVisuals>().animator.CrossFade("Walk", 0.1f, 0);
@@ -114,20 +122,27 @@ public class QuestGManager : MonoBehaviour
             Quaternion targetRotation = Quaternion.Euler(0f, 90f, 0f);
             while (Quaternion.Angle(adventurerGO.transform.rotation, targetRotation) > 0.5f)
             {
-                adventurerGO.transform.rotation = Quaternion.RotateTowards(adventurerGO.transform.rotation, targetRotation, 150f * Time.deltaTime * speedMod);
+                adventurerGO.transform.rotation = Quaternion.RotateTowards(adventurerGO.transform.rotation, targetRotation, 180f * Time.deltaTime * speedMod);
                 yield return new WaitForEndOfFrame();
             }
             while (Vector3.Distance(adventurerGO.transform.position, targetPosition) > 0.05f)
             {
-                adventurerGO.transform.position = Vector3.MoveTowards(adventurerGO.transform.position, targetPosition, Time.deltaTime * 1.25f * speedMod);
+                adventurerGO.transform.position = Vector3.MoveTowards(adventurerGO.transform.position, targetPosition, Time.deltaTime * 2.5f * speedMod);
                 yield return new WaitForEndOfFrame();
             }
             while (Quaternion.Angle(adventurerGO.transform.rotation, originalRotation) > 0.5f)
             {
-                adventurerGO.transform.rotation = Quaternion.RotateTowards(adventurerGO.transform.rotation, originalRotation, 150f * Time.deltaTime * speedMod);
+                adventurerGO.transform.rotation = Quaternion.RotateTowards(adventurerGO.transform.rotation, originalRotation, 180f * Time.deltaTime * speedMod);
                 yield return new WaitForEndOfFrame();
             }
-            adventurerGO.GetComponent<AdventurerVisuals>().animator.CrossFade("Iddle", 0.1f, 0);
+            if (Vector3.Distance(adventurerGO.transform.position, Vector3.zero) < 2.5f)
+            {
+                adventurerGO.GetComponent<AdventurerVisuals>().animator.CrossFade("Sit", 0.3f, 0);
+            }
+            else
+            {
+                adventurerGO.GetComponent<AdventurerVisuals>().animator.CrossFade("Iddle", 0.1f, 0);
+            }
             yield return new WaitForEndOfFrame();
         }
         Debug.Log("Finished");
@@ -145,5 +160,22 @@ public class QuestGManager : MonoBehaviour
         charNameText.text = adventurer.characterName;
         charHpText.text = "HP: " + adventurer.hpTotal.ToString();
         charLevelText.text = "LEVEL: " + adventurer.characterLevel.ToString();
+    }
+
+    public void AssignMissionOnCharacter(MissionInfo missionInfo)
+    {
+        charPanel.SetActive(false);
+        missionBoardGO.SetActive(false);
+        missionInfo.adventurerOnTest = actualAdventurer.GetComponent<AdventurerVisuals>().relationedAdventurer;
+        GameData.Instance.activeMissions.Add(missionInfo);
+        actualAdventurer = null;
+        if (pendingAdventurers.Count > 0)
+        {
+            StartCoroutine(MoveCharacters());
+        }
+        else
+        {
+            // Go to other Scene
+        }
     }
 }
