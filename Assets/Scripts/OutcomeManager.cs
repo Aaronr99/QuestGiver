@@ -40,8 +40,11 @@ public class OutcomeManager : MonoBehaviour
     public Button audioButton;
     public Button musicButton;
 
+    public bool winCondition;
+
     private void Start()
     {
+        winCondition = false;
         audioButton.onClick.AddListener(() => GameData.Instance.ChangeAudioState(audioButton));
         musicButton.onClick.AddListener(() => GameData.Instance.ChangeMusicState(musicButton));
         Invoke("StartProcess", 0.5f);
@@ -81,20 +84,20 @@ public class OutcomeManager : MonoBehaviour
         float randomOutcome = Random.Range(0f, 1f);
         if (adventurer.weaponType == actualMission.favoredWeapon)
         {
-            randomOutcome += 0.15f;
+            randomOutcome += 0.125f;
         }
         else if (adventurer.weaponType == actualMission.disfavoredWeapon)
         {
-            randomOutcome -= 0.15f;
+            randomOutcome -= 0.125f;
         }
 
         if (adventurer.adventurerType == actualMission.favouredAdventurer)
         {
-            randomOutcome += 0.15f;
+            randomOutcome += 0.125f;
         }
         else if (adventurer.adventurerType == actualMission.disfavoredAdventurer)
         {
-            randomOutcome -= 0.15f;
+            randomOutcome -= 0.125f;
         }
         float levelDiference = adventurer.characterLevel - actualMission.level;
         float diferenceMod = 1f;
@@ -104,11 +107,11 @@ public class OutcomeManager : MonoBehaviour
         }
         randomOutcome += levelDiference * diferenceMod;
         OutcomeType outcomeType;
-        if (randomOutcome >= 0.775f)
+        if (randomOutcome >= 0.8f)
         {
             outcomeType = OutcomeType.Win;
         }
-        else if (randomOutcome >= 0.425f)
+        else if (randomOutcome >= 0.435f)
         {
             outcomeType = OutcomeType.Sucess;
         }
@@ -141,6 +144,10 @@ public class OutcomeManager : MonoBehaviour
 
     private void OutcomeWin()
     {
+        if (actualMission.level >= 5)
+        {
+            winCondition = true;
+        }
         audioSource.clip = winClip;
         audioSource.Play();
         actualAdventurer.GetComponent<AdventurerVisuals>().animator.CrossFade("Win", 0f, 0);
@@ -167,6 +174,10 @@ public class OutcomeManager : MonoBehaviour
 
     private void OutcomeSucess()
     {
+        if (actualMission.level >= 5)
+        {
+            winCondition = true;
+        }
         audioSource.clip = sucessAudioClip;
         audioSource.Play();
         actualAdventurer.GetComponent<AdventurerVisuals>().animator.CrossFade("Walk", 0f, 0);
@@ -264,7 +275,22 @@ public class OutcomeManager : MonoBehaviour
             }
             else
             {
-                SceneManager.LoadScene(0);
+                if (!winCondition)
+                {
+                    if (GameData.Instance.activeAdventurers.Count <= 0)
+                    {
+                        SceneManager.LoadScene(2);
+                    }
+                    else
+                    {
+                        SceneManager.LoadScene(0);
+                    }
+                }
+                else
+                {
+                    SceneManager.LoadScene(3);
+                }
+
             }
         }
     }

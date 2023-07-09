@@ -37,6 +37,7 @@ public class QuestGManager : MonoBehaviour
     public TMP_Text charHpText;
     public TMP_Text charNameText;
     public TMP_Text weeksText;
+    public TMP_Text weekToNextAdventurer;
 
     public GameObject missionBoardGO;
     public Transform missionBoard;
@@ -76,25 +77,50 @@ public class QuestGManager : MonoBehaviour
         missionBoardGO.SetActive(false);
         weeksText.text = GameData.Instance.weekCount.ToString();
 
-        GenerateMissions();
+        weekToNextAdventurer.text = (4 - (GameData.Instance.weekCount % 4)).ToString();
+
         GenerateAdventurers();
+        GenerateMissions();
     }
 
     private void GenerateAdventurers()
     {
-        while (GameData.Instance.activeAdventurers.Count < 5)
+        if (GameData.Instance.weekCount == 1)
         {
-            Adventurer newAdventurer = ScriptableObject.CreateInstance<Adventurer>();
-            int randomType = UnityEngine.Random.Range(0, 7);
-            newAdventurer.adventurerType = (AdventurerType)randomType;
-            newAdventurer.characterLevel = 1;
-            newAdventurer.hpTotal = newAdventurer.GetMaxHP();
-            newAdventurer.characterName = GameData.Instance.GetRandomName() + " The " + GameData.Instance.GetRandomPrefix(newAdventurer.adventurerType);
-            randomType = UnityEngine.Random.Range(0, 5);
-            newAdventurer.weaponType = (WeaponType)randomType;
-            GameData.Instance.activeAdventurers.Add(newAdventurer);
-
+            while (GameData.Instance.activeAdventurers.Count < 3)
+            {
+                Adventurer newAdventurer = ScriptableObject.CreateInstance<Adventurer>();
+                int randomType = UnityEngine.Random.Range(0, 7);
+                newAdventurer.adventurerType = (AdventurerType)randomType;
+                newAdventurer.characterLevel = 1;
+                newAdventurer.hpTotal = newAdventurer.GetMaxHP();
+                newAdventurer.characterName = GameData.Instance.GetRandomName() + " The " + GameData.Instance.GetRandomPrefix(newAdventurer.adventurerType);
+                randomType = UnityEngine.Random.Range(0, 5);
+                newAdventurer.weaponType = (WeaponType)randomType;
+                GameData.Instance.activeAdventurers.Add(newAdventurer);
+            }
         }
+        // Genera un aventurero si faltan y si la semana es multiplo de 4
+        if (GameData.Instance.weekCount % 4 == 0)
+        {
+            if (GameData.Instance.activeAdventurers.Count < 5)
+            {
+                Adventurer newAdventurer = ScriptableObject.CreateInstance<Adventurer>();
+                int randomType = UnityEngine.Random.Range(0, 7);
+                newAdventurer.adventurerType = (AdventurerType)randomType;
+                newAdventurer.characterLevel = 1;
+                newAdventurer.hpTotal = newAdventurer.GetMaxHP();
+                newAdventurer.characterName = GameData.Instance.GetRandomName() + " The " + GameData.Instance.GetRandomPrefix(newAdventurer.adventurerType);
+                randomType = UnityEngine.Random.Range(0, 5);
+                newAdventurer.weaponType = (WeaponType)randomType;
+                GameData.Instance.activeAdventurers.Add(newAdventurer);
+            }
+        }
+        if (GameData.Instance.activeAdventurers.Count == 5)
+        {
+            weekToNextAdventurer.text = "MAX";
+        }
+
         int cont = 1;
         foreach (Adventurer adventurer in GameData.Instance.activeAdventurers)
         {
@@ -106,13 +132,14 @@ public class QuestGManager : MonoBehaviour
             adventurersList.Add(adventurerGO);
             pendingAdventurers.Enqueue(adventurerGO);
         }
+
         StartCoroutine(MoveCharacters());
     }
 
     private void GenerateMissions()
     {
         Dificulty targetDificulty = GameData.Instance.GetDificulty();
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < adventurersList.Count; i++)
         {
             GameObject cardGO = Instantiate(GameData.Instance.missionPrefab, missionBoard);
             MissionCard card = cardGO.GetComponent<MissionCard>();

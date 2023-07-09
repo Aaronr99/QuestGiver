@@ -37,6 +37,7 @@ public class GameData : MonoBehaviour
 
     private void Awake()
     {
+        Application.targetFrameRate = 60;
         if (GameObject.FindGameObjectsWithTag("GameData").Length > 1)
         {
             Destroy(gameObject);
@@ -45,7 +46,7 @@ public class GameData : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject);
         }
-       
+
         if (!initialized)
         {
             weekCount = 1;
