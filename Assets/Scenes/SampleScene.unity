@@ -2595,6 +2595,7 @@ GameObject:
   - component: {fileID: 843461570}
   - component: {fileID: 843461572}
   - component: {fileID: 843461571}
+  - component: {fileID: 843461573}
   m_Layer: 5
   m_Name: DownMenu
   m_TagString: Untagged
@@ -2661,6 +2662,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 843461569}
   m_CullTransparentMesh: 1
+--- !u!111 &843461573
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 843461569}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 13f2a753a09a1da4eb1f4ce20f1d2470, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 13f2a753a09a1da4eb1f4ce20f1d2470, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1001 &850065904
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5369,6 +5386,7 @@ GameObject:
   - component: {fileID: 1932562261}
   - component: {fileID: 1932562260}
   - component: {fileID: 1932562262}
+  - component: {fileID: 1932562263}
   m_Layer: 5
   m_Name: Character Panel
   m_TagString: Untagged
@@ -5465,6 +5483,22 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!111 &1932562263
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1932562258}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 04d2a723a15957447a1d0ed865a03ea9, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 04d2a723a15957447a1d0ed865a03ea9, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1001 &2021697008
 PrefabInstance:
   m_ObjectHideFlags: 0

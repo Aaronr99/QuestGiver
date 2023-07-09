@@ -112,6 +112,17 @@ public class QuestGManager : MonoBehaviour
             MissionInfo missionInfo = Instantiate(GameData.Instance.GetRandomMission(targetDificulty.cardLevels[i]));
             card.SetCardInfo(missionInfo);
             missionCards.Add(card);
+            cardGO.SetActive(false);
+        }
+    }
+
+    private IEnumerator EnableCards()
+    {
+        yield return new WaitForSeconds(0.3f);
+        foreach (MissionCard missionCard in missionCards)
+        {
+            missionCard.gameObject.SetActive(true);
+            yield return new WaitForSeconds(0.2f);
         }
     }
 
@@ -120,6 +131,7 @@ public class QuestGManager : MonoBehaviour
         charPanel.SetActive(true);
         missionBoardGO.SetActive(true);
         actualAdventurer = pendingAdventurers.Dequeue();
+        StartCoroutine(EnableCards());
 
         Adventurer adventurer = actualAdventurer.GetComponent<AdventurerVisuals>().relationedAdventurer;
         charNameText.text = adventurer.characterName;
@@ -195,6 +207,10 @@ public class QuestGManager : MonoBehaviour
 
     private IEnumerator MoveCharacters()
     {
+        foreach (MissionCard missionCard in missionCards)
+        {
+            missionCard.gameObject.SetActive(false);
+        }
         foreach (GameObject adventurerGO in adventurersList)
         {
             adventurerGO.GetComponent<AdventurerVisuals>().MoveCharacter();
