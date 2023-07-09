@@ -151,7 +151,7 @@ public class GameData : MonoBehaviour
 
     public Dificulty GetDificulty()
     {
-        int dificultyValue = Mathf.RoundToInt(weekCount / 4);
+        int dificultyValue = Mathf.RoundToInt(weekCount / 2);
         if (dificultyValue <= 0)
         {
             dificultyValue = 1;
@@ -160,6 +160,35 @@ public class GameData : MonoBehaviour
     }
 
     public List<MissionInfo> activeMissions;
+
+    public bool ActualizeAdventurerXP(int pXp, Adventurer adventurer)
+    {
+        foreach (Adventurer activeAdventurer in activeAdventurers)
+        {
+            if (adventurer == activeAdventurer)
+            {
+                return activeAdventurer.AddExperience(pXp);
+            }
+        }
+        Debug.LogError("ALGO ESTA MAL, NO ENCUENTRA EL AVENTURERO");
+        return false;
+    }
+
+    public bool ActualizeAdventurerHP(int pHp, Adventurer adventurer)
+    {
+        foreach (Adventurer activeAdventurer in activeAdventurers)
+        {
+            if (adventurer == activeAdventurer)
+            {
+                activeAdventurer.hpTotal -= pHp;
+                if (activeAdventurer.hpTotal <= 0)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
 
 [System.Serializable]

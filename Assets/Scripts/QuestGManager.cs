@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class QuestGManager : MonoBehaviour
 {
@@ -48,6 +49,7 @@ public class QuestGManager : MonoBehaviour
     {
         pendingAdventurers = new Queue<GameObject>();
         adventurersList = new List<GameObject>();
+        GameData.Instance.activeMissions = new List<MissionInfo>();
 
         charPanel.SetActive(false);
         missionBoardGO.SetActive(false);
@@ -64,8 +66,8 @@ public class QuestGManager : MonoBehaviour
             Adventurer newAdventurer = ScriptableObject.CreateInstance<Adventurer>();
             int randomType = UnityEngine.Random.Range(0, 6);
             newAdventurer.adventurerType = (AdventurerType)randomType;
-            newAdventurer.hpTotal = newAdventurer.GetMaxHP();
             newAdventurer.characterLevel = 1;
+            newAdventurer.hpTotal = newAdventurer.GetMaxHP();
             newAdventurer.characterName = GameData.Instance.GetRandomName() + " The " + GameData.Instance.GetRandomPrefix(newAdventurer.adventurerType);
             randomType = UnityEngine.Random.Range(0, 5);
             newAdventurer.weaponType = (WeaponType)randomType;
@@ -123,7 +125,8 @@ public class QuestGManager : MonoBehaviour
         }
         else
         {
-            // Go to other Scene
+            GameData.Instance.weekCount += 1;
+            SceneManager.LoadScene(2);
         }
     }
 

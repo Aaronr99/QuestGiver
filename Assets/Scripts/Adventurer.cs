@@ -39,7 +39,7 @@ public class Adventurer : ScriptableObject
             default:
                 break;
         }
-        return baseHP * characterLevel;
+        return baseHP * characterLevel * 10;
     }
 
     public int GetMaxExperience()
